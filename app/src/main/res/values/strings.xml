@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CryptocurrencyTracker</string>
+    <string name="currency">Started to Discover New Currency</string>
+    <string name="quote">Bitcoin is exciting me because it shows how cheap transactions can be</string>
+    <string name="crypto">Cryptocurrency Tracker</string>
+    <string name="quote1">"Cryptocurrency Tracker is the simple way tracking digital currency. "</string>
+    <string name="sign_up">Sign up</string>
+    <string name="log_in">Log In</string>
 </resources>
