@@ -1,11 +1,11 @@
-package com.bhavesh.cryptocurrencytracker
+package com.bhavesh.cryptocurrencytracker.ui.view
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.bhavesh.cryptocurrencytracker.R
 import com.bhavesh.cryptocurrencytracker.databinding.ActivityMainBinding
-import com.bhavesh.cryptocurrencytracker.ui.HomeActivity
 import com.bhavesh.cryptocurrencytracker.ui.signup.RegistrationActivity
 import com.google.firebase.auth.FirebaseAuth
 
