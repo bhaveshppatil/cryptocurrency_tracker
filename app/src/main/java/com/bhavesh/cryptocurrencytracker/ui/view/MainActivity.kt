@@ -20,11 +20,11 @@ class MainActivity : AppCompatActivity() {
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         dataBinding.btnGetStarted.setOnClickListener {
-            val  user = auth.currentUser
-            if (user != null){
+            val user = auth.currentUser
+            if (user != null) {
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
-            }else{
+            } else {
                 val intent = Intent(this, RegistrationActivity::class.java)
                 startActivity(intent)
             }
