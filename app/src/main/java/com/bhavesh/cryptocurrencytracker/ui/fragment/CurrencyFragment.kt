@@ -54,6 +54,7 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
         checkNetworkConnectivity()
         auth = FirebaseAuth.getInstance()
 
+        //By auth.currentUser displaying username & profile picture
         val user = auth.currentUser
         dataBinding.apply {
             tvUsername.text = user?.displayName
@@ -62,6 +63,10 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
                 searchBar.visibility = View.VISIBLE
             }
         }
+
+        /*
+        user can search currency by name, on query changed updating data
+        */
         dataBinding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 dataBinding.searchBar.visibility = View.GONE
@@ -80,24 +85,28 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
         connectionLiveData.observe(viewLifecycleOwner, {
             if (it) {
                 loadDatFromApi()
-            } else {
-                showToast("check internet connection..")
             }
         })
     }
 
+    /*
+    used shimmer animation as a loader, after getting data from api adding data in datalist
+    */
     private fun loadDatFromApi() {
-        dataBinding.progressBar.visibility = View.VISIBLE
+        dataBinding.shimmer.startShimmer()
         cryptoViewModel.getDataFromApi().observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Status.ERROR -> {
+                    dataBinding.shimmer.stopShimmer()
+                    dataBinding.shimmer.visibility = View.GONE
                     showToast("network error..")
-                    dataBinding.progressBar.visibility = View.GONE
                 }
                 Status.SUCCESS -> {
                     it.data?.data?.let {
                         dataList.addAll(it)
-                        dataBinding.progressBar.visibility = View.GONE
+                        dataBinding.shimmer.stopShimmer()
+                        dataBinding.shimmer.visibility = View.GONE
+                        dataBinding.recyclerView.visibility = View.VISIBLE
                         setRecyclerView()
                     }
                 }
@@ -105,6 +114,7 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
         })
     }
 
+    //setting adapter & layout manager to recyclerview
     private fun setRecyclerView() {
         cryptoAdapter = CryptoAdapter(dataList, this)
         recycler_view.apply {
@@ -117,7 +127,7 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-
+    //searching entered query in our datalist
     private fun searchCurrency(query: String) {
         val resultList = ArrayList<Data>()
         for (data in dataList) {
@@ -132,8 +142,15 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
         }
     }
 
-    override fun addItemToFavorite(data: Data) {
+    /*
 
+    override addItemToFavorite() & removeItemFromFavorite() from OnItemClick interface
+
+     onclick of recyclerview item adding that item data into currency data class and by using currency name
+     adding new child on firebase
+     */
+
+    override fun addItemToFavorite(data: Data) {
         database = FirebaseDatabase.getInstance().getReference("currency")
         val currency = Currency(data.name, data.symbol, data.last_updated, data.quote.USD.price)
         database.child(data.name).setValue(currency).addOnSuccessListener {

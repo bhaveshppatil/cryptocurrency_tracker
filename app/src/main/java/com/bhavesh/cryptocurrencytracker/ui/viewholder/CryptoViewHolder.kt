@@ -8,15 +8,15 @@ import com.bhavesh.cryptocurrencytracker.ui.clicklistener.OnItemClick
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
+
 class CryptoViewHolder(
     private val itemLayoutBinding: CryptoItemLayoutBinding,
     private val onItemClick: OnItemClick
 ) :
     RecyclerView.ViewHolder(itemLayoutBinding.root) {
-
-    private val decimal = DecimalFormat("#.##")
     fun onBindData(data: Data) {
 
+        val decimal = DecimalFormat("#.##")
         val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         val output = SimpleDateFormat("dd-MM-yyyy")
         val date = input.parse(data.last_updated)

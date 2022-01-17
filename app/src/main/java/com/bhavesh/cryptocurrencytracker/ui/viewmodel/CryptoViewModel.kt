@@ -10,6 +10,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
+
+/**
+ * This is a bridge between our activity and Repository, where we are notifying activity(view)
+ * about the response change via livedata
+*/
+
 @HiltViewModel
 class CryptoViewModel @Inject constructor(private val cryptoRepository: CryptoRepository) :
     ViewModel() {

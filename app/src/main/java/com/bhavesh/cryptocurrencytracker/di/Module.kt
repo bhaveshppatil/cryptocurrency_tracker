@@ -15,9 +15,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object Module {
 
+    /*
+    used httpLoggingInterceptor to track api call information in logcat
+    */
     private val httpLoggingInterceptor =
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
+    /*
+
+    */
     @Provides
     fun provideApiService(): ApiService {
         val retrofit = Retrofit.Builder()
