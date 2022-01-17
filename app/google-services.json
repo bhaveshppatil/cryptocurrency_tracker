@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "373684524637",
+    "project_id": "cryptocurrency-tracker-4b31b",
+    "storage_bucket": "cryptocurrency-tracker-4b31b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373684524637:android:f0fd006fb785b86a661fb4",
+        "android_client_info": {
+          "package_name": "com.bhavesh.cryptocurrencytracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373684524637-9l8tk4mkfjj8omlv6m6k6o7q8qjfjqnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH9sio4Gkp1CJmwnLYBrv5PLljHXXpxi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373684524637-9l8tk4mkfjj8omlv6m6k6o7q8qjfjqnk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

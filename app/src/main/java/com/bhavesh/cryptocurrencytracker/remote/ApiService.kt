@@ -1,9 +1,12 @@
 package com.bhavesh.cryptocurrencytracker.remote
 
-import com.bhavesh.cryptocurrencytracker.remote.response.CryptoResponse
+import com.bhavesh.cryptocurrencytracker.remote.response.CryptoModel
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Headers
+
+/* This interface use for api calling , we want to fetch only data from api thats why we
+will use get request
+ */
 
 interface ApiService {
 
@@ -11,5 +14,5 @@ interface ApiService {
 
     @Headers("X-CMC_PRO_API_KEY: a72cd0cc-f070-4d69-bf62-d1a5c3d68ac0")
     @GET("v1/cryptocurrency/listings/latest")
-    suspend fun getCryptoData(): CryptoResponse
+    suspend fun getCryptoData(): CryptoModel
 }

@@ -1,9 +1,6 @@
 package com.bhavesh.cryptocurrencytracker.ui.view
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,7 +8,6 @@ import com.bhavesh.cryptocurrencytracker.R
 import com.bhavesh.cryptocurrencytracker.ui.fragment.CurrencyFragment
 import com.bhavesh.cryptocurrencytracker.ui.fragment.FavoriteFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -22,7 +18,6 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemReselectedListener {
             when (it.itemId) {

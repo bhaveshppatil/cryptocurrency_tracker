@@ -1,7 +1,7 @@
 package com.bhavesh.cryptocurrencytracker.di
 
-import com.bhavesh.cryptocurrencytracker.remote.ApiService
 import com.bhavesh.cryptocurrencytracker.utils.Constant.BASE_URL
+import com.bhavesh.cryptocurrencytracker.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

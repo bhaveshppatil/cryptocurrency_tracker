@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bhavesh.cryptocurrencytracker.R
 import com.bhavesh.cryptocurrencytracker.databinding.CryptoItemLayoutBinding
 import com.bhavesh.cryptocurrencytracker.remote.response.Data
+import com.bhavesh.cryptocurrencytracker.ui.clicklistener.OnItemClick
 import com.bhavesh.cryptocurrencytracker.ui.viewholder.CryptoViewHolder
 
 class CryptoAdapter(
-    val context: Context,
     var dataModelList: MutableList<Data>,
+    val onItemClick: OnItemClick
 ) : RecyclerView.Adapter<CryptoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CryptoViewHolder {
@@ -22,7 +23,7 @@ class CryptoAdapter(
             parent,
             false
         )
-        return CryptoViewHolder(itemLayoutBinding)
+        return CryptoViewHolder(itemLayoutBinding, onItemClick)
     }
 
     override fun onBindViewHolder(holder: CryptoViewHolder, position: Int) {
@@ -35,7 +36,7 @@ class CryptoAdapter(
         return dataModelList.size
     }
 
-    fun searchCurrencyInList(searchDataList : ArrayList<Data>){
+    fun searchCurrencyInList(searchDataList: ArrayList<Data>) {
         dataModelList = searchDataList
         notifyDataSetChanged()
     }

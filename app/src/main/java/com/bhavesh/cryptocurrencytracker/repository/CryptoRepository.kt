@@ -3,17 +3,17 @@ package com.bhavesh.cryptocurrencytracker.repository
 import com.bhavesh.cryptocurrencytracker.remote.ApiService
 import com.bhavesh.cryptocurrencytracker.remote.Resource
 import com.bhavesh.cryptocurrencytracker.remote.ResponseHandler
-import com.bhavesh.cryptocurrencytracker.remote.response.CryptoResponse
+import com.bhavesh.cryptocurrencytracker.remote.response.CryptoModel
 import javax.inject.Inject
 
-class CryptoRepository @Inject constructor(val apiService: ApiService) {
+class CryptoRepository @Inject constructor(private val apiService: ApiService) {
 
-    private var responseHandler: ResponseHandler = ResponseHandler()
+    private val responseHandler: ResponseHandler = ResponseHandler()
 
-    suspend fun getDataFromApi(): Resource<CryptoResponse> {
+    suspend fun getDataFromAPI(): Resource<CryptoModel> {
         return try {
-            val response: CryptoResponse = apiService.getCryptoData()
-            responseHandler.handleSuccess(response)
+            val cryptoModel: CryptoModel = apiService.getCryptoData()
+            responseHandler.handleSuccess(cryptoModel)
         } catch (e: Exception) {
             responseHandler.handleException(e)
         }
