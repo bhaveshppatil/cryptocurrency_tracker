@@ -14,12 +14,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bhavesh.cryptocurrencytracker.R
 import com.bhavesh.cryptocurrencytracker.databinding.FragmentCurrencyBinding
 import com.bhavesh.cryptocurrencytracker.remote.ConnectionLiveData
+import com.bhavesh.cryptocurrencytracker.remote.Currency
 import com.bhavesh.cryptocurrencytracker.remote.Status
 import com.bhavesh.cryptocurrencytracker.remote.response.Data
 import com.bhavesh.cryptocurrencytracker.ui.adapter.CryptoAdapter
 import com.bhavesh.cryptocurrencytracker.ui.clicklistener.OnItemClick
 import com.bhavesh.cryptocurrencytracker.ui.viewmodel.CryptoViewModel
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_currency.*
 
@@ -32,6 +36,7 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
     private var dataList = mutableListOf<Data>()
     private lateinit var connectionLiveData: ConnectionLiveData
     private lateinit var dataBinding: FragmentCurrencyBinding
+    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,10 +52,19 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
         super.onViewCreated(view, savedInstanceState)
 
         checkNetworkConnectivity()
+        auth = FirebaseAuth.getInstance()
 
+        val user = auth.currentUser
+        dataBinding.apply {
+            tvUsername.text = user?.displayName
+            Glide.with(ivProfile).load(user?.photoUrl).into(ivProfile)
+            ivSearch.setOnClickListener {
+                searchBar.visibility = View.VISIBLE
+            }
+        }
         dataBinding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-
+                dataBinding.searchBar.visibility = View.GONE
                 return false
             }
 
@@ -118,7 +132,18 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
         }
     }
 
-    override fun addItemToFavorite() {
-        showToast("item added to favorite..")
+    override fun addItemToFavorite(data: Data) {
+
+        database = FirebaseDatabase.getInstance().getReference("currency")
+        val currency = Currency(data.name, data.symbol, data.last_updated, data.quote.USD.price)
+        database.child(data.name).setValue(currency).addOnSuccessListener {
+            showToast("item added to favorite..")
+        }.addOnFailureListener {
+            showToast("failed to add item..")
+        }
+    }
+
+    override fun removeItemFromFavorite(currency: Currency) {
+        TODO("Not yet implemented")
     }
 }

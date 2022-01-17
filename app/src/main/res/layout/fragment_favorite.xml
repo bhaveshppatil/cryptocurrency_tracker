@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.FavoriteFragment">
+<layout>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".ui.fragment.FavoriteFragment">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvFavoriteListTag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/dp_20"
+            android:fontFamily="@font/fredoka_one"
+            android:text="@string/favorite"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="@dimen/sp_25" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_favorite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvFavoriteListTag"
+            android:layout_margin="@dimen/dp_10" />
+
+    </RelativeLayout>
+</layout>
