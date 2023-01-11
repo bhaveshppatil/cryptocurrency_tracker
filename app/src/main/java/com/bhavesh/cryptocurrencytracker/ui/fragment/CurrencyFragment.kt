@@ -82,11 +82,11 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
 
     private fun checkNetworkConnectivity() {
         connectionLiveData = ConnectionLiveData(requireActivity().application)
-        connectionLiveData.observe(viewLifecycleOwner, {
+        connectionLiveData.observe(viewLifecycleOwner) {
             if (it) {
                 loadDatFromApi()
             }
-        })
+        }
     }
 
     /*
