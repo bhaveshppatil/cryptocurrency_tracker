@@ -21,9 +21,6 @@ object Module {
     private val httpLoggingInterceptor =
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
-    /*
-
-    */
     @Provides
     fun provideApiService(): ApiService {
         val retrofit = Retrofit.Builder()
