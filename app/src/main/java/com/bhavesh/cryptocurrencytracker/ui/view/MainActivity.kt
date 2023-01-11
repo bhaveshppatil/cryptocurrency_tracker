@@ -10,6 +10,7 @@ import com.bhavesh.cryptocurrencytracker.ui.signup.RegistrationActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var dataBinding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
 
