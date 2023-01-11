@@ -64,6 +64,9 @@ class CurrencyFragment : Fragment(R.layout.fragment_currency), OnItemClick {
             }
         }
 
+
+
+
         /*
         user can search currency by name, on query changed updating data
         */
